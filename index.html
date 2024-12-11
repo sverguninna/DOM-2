@@ -3,144 +3,64 @@
   <head>
     <title>Проект "Комменты"</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
-   <style>
-    .color{
-      background-color: red;
-    }
-    .color-comment{
-      background-color: brown;
-    }
-    .color-bog{
-      background-image: url(./free-icon-heart-2589175.png) ;
-      
-    }
-   </style>
+
   <body>
     <div class="container">
-      <ul id="sheet" class="comments">
-      
+      <ul class="comments">
+        <li class="comment">
+          <div class="comment-header">
+            <div>Глеб Фокин</div>
+            <div>12.02.22 12:18</div>
+          </div>
+          <div class="comment-body">
+            <div class="comment-text">
+              Это будет первый комментарий на этой странице
+            </div>
+          </div>
+          <div class="comment-footer">
+            <div class="likes">
+              <span class="likes-counter">3</span>
+              <button class="like-button"></button>
+            </div>
+          </div>
+        </li>
+        <li class="comment">
+          <div class="comment-header">
+            <div>Варвара Н.</div>
+            <div>13.02.22 19:22</div>
+          </div>
+          <div class="comment-body">
+            <div class="comment-text">
+              Мне нравится как оформлена эта страница! ❤
+            </div>
+          </div>
+          <div class="comment-footer">
+            <div class="likes">
+              <span class="likes-counter">75</span>
+              <button class="like-button -active-like"></button>
+            </div>
+          </div>
+        </li>
       </ul>
       <div class="add-form">
-        <input id="input"
+        <input
           type="text"
           class="add-form-name"
           placeholder="Введите ваше имя"
         />
-        <textarea id="comment"
+        <textarea
           type="textarea"
           class="add-form-text"
           placeholder="Введите ваш коментарий"
           rows="4"
         ></textarea>
         <div class="add-form-row">
-          <button id="button" class="add-form-button">Написать</button>
+          <button class="add-form-button">Написать</button>
         </div>
       </div>
     </div>
+    <script src="DOM-comment.js"></script>
   </body>
-
-  <script src="js-1.js"></script>
-  <script>
-      const sheet = document.getElementById('sheet')
-      const button = document.getElementById('button')
-      const input = document.getElementById('input')
-       const comment = document.getElementById('comment')
-      const likesCounter =document.querySelectorAll('.likes-counter')
-      const likesButtonElements  = document.querySelectorAll('.like-button')
-      
-      const comments=[
-        {
-          name: 'Глеб Фокин',
-          data: '12.02.22 12:18',
-          comment: ' Это будет первый комментарий на этой странице',
-          like :'3',
-          isLiked: false
-        },
-        {
-          name: 'Варвара Н.',
-          data: '13.02.22 19:22',
-          comment: ' Мне нравится как оформлена эта страница! ❤',
-          like :'75', 
-          isLiked: false
-        }
-      ]
-
-     const  renderCommentsList = ()=> {
-     const commentHTML =  comments.map((comment)=>{
-       return ` <li  class="comment">
-          <div class="comment-header">
-            <div>${comment.name} </div>
-            <div>${comment.data} </div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              ${comment.comment}
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter" >${comment.like} </span>
-              <button class="like-button" ${comment.liked ? '-active-like ' : '' } 'data-index ='${index}' ></button>
-         /*      мне не понятна эта строчка что за data-index ='${index} и '-active-like, это похоже на тернарный оператор как мне дальше использовать эту строку ?? */
-            </div>
-          </div>
-        </li>`
-
-      }).join(' ')
-     sheet.innerHTML = commentHTML
-     }
-    renderCommentsList()
-
-    const addLikesButtonElements = ( ) => {
-      const likesButtonElements  = document.querySelectorAll('.like-button')
-        for (const likeButtonElement of likesButtonElements) {
-          likeButtonElement.addEventListener('click', () => {
-            likeButtonElement.classList.add('color-bog')
-            let counter = comments[2].like =
-            likeButtonElement.dataset.counter+=1
-            
-          })
-        }
-       }  
-         
-
-      const innerEverListeners = () =>{
-         const comments=  document.querySelectorAll('.comment')
-         for (const comment  of comments) {
-            
-          
-         }
-       }
-
-
-      button.addEventListener('click', ()=>{
-        input.classList.remove('color')
-        if (input.value === '') {
-          input.classList.add('color')
-          return
-        }
-
-        comment.classList.remove('color-comment')
-        if (comment.value === '') {
-          comment.classList.add('color-comment')
-          return
-        }
-       const oldListHtml  = sheet.innerHTML
-
-       comments.push({
-         name: input.value,
-         data: todayDate(NowDate ),
-         comment: comment.value,
-         like: 0
-       })
-         innerEverListeners()
-         renderCommentsList()
-          addLikesButtonElements ()
-       
-      })
-
-    
-  </script>
 </html>
