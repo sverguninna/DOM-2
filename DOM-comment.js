@@ -75,7 +75,7 @@ function clearForm(){
 function pushComment() {
     if (inputName.value !== '' && inputText.value !=='') {
         userComments.push({
-        userName: inputName.value,
+        userName:checkingСomments( inputName.value),
         userComment: checkingСomments(inputText.value),
         userNumLike: 0,
         date: getDateNow(), 
@@ -97,6 +97,7 @@ function updateEvent() {
 }
 
 function responseСomment(e) {
+   
     let id = Number(e.target.dataset.id)
     console.log(id);
     userComments.forEach((comment)=>{
@@ -107,6 +108,7 @@ function responseСomment(e) {
 }
 
 function addLike(e) {
+    e.stopPropagation()
     let id = Number(e.target.dataset.id)
    console.log(id);
     userComments = userComments.map((comment)=>{
