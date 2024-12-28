@@ -1,0 +1,82 @@
+import { renderList } from "./render.js"
+import { getDateNow, getSafeHtmlString, getTimeNow, clearForm } from "../helper/helpers.js"
+import { data } from "../constans/data.js"
+
+const addFormButton = document.querySelector('.add-form-button')
+const inputName = document.querySelector('.add-form-name')
+const inputText = document.querySelector('.add-form-text')
+
+
+renderList()
+
+
+function pushComment() {
+    console.log('add comment')
+    if (inputName.value !== '' && inputText.value !=='') {
+        data.userComments.push({
+        userName: getSafeHtmlString(inputName.value),
+        userComment: (inputText.value),
+        userNumLike: 0,
+        date: getDateNow(), 
+        time: getTimeNow(),
+        id: Math.random(),
+        like: false,
+        })
+        renderList()
+        clearForm(inputName, inputText)
+    }
+   return
+}
+
+function updateEvent() {
+     document.querySelectorAll('.like-button')
+    .forEach((like)=> like.addEventListener('click', addLike))
+    document.querySelectorAll('.comment')
+    .forEach((comment)=> comment.addEventListener('click', responseСomment))
+}
+
+function responseСomment(e) {
+   
+    let id = Number(e.target.dataset.id)
+    console.log(id);
+    data.userComments.forEach((comment)=>{
+        if (comment.id === id ) {
+           inputText.value = `Oтвет пользователю ${comment.userName}, ${comment.userComment}.` 
+        } 
+    })
+}
+
+function addLike(e) {
+    e.stopPropagation()
+    let id = Number(e.target.dataset.id)
+   console.log(id);
+    let newValue = data.userComments.map((comment)=>{
+        if (comment.id === id && !comment.like) {
+            return {...comment, like: !comment.like, userNumLike: comment.userNumLike + 1}
+        } else if (comment.id === id && comment.like){
+            return {...comment, like: !comment.like, userNumLike: comment.userNumLike - 1}
+        } else {
+            return comment
+        }
+    })
+    data.setUserComments(newValue)
+    
+    renderList()
+}
+
+
+
+
+addFormButton.addEventListener('click', pushComment)
+
+
+export {updateEvent}
+
+// Операторы легко отличить. Когда синтаксис ... используется для «распаковки» элементов массива 
+// или объекта в отдельные аргументы — это spread. 
+// А если три точки используются для сбора оставшихся аргументов в массив или объект — это оператор rest.
+
+/* let arr = [1,2,3]
+
+let newArr = [...arr] // spred
+let [a, ...b] = arr // rest  */

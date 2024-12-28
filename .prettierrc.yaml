@@ -1,0 +1,9 @@
+{
+tabWidth: 4,
+semi: false ,
+singleQuote: true,
+ rules:{
+   editor.defaultFormatter: "esbenp.prettier-vscode",
+   editor.formatOnSave: true,
+ }
+}
