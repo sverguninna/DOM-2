@@ -1,5 +1,11 @@
 import { updateEvent } from "./comments.js"
 import { data } from "../constans/data.js"
+import { getCommentsList } from "../APİ/Requests.js" 
+
+getCommentsList()
+
+
+
 
 const commentsList = document.querySelector('.comments')
 
@@ -8,12 +14,12 @@ function renderList() {
     data.userComments.map((comment)=>
     commentsList.innerHTML+=` <li class="comment"  data-id="${comment.id}">
             <div class="comment-header">
-              <div>${comment.userName} </div>
-              <div>${comment.date} ${comment.time} </div>
+              <div>${comment.name} </div>
+              <div>${comment.date}</div>
             </div>
             <div class="comment-body">
               <div class="comment-text">
-              ${comment.userComment}
+              ${comment.text}
               </div>
             </div>
             <div class="comment-footer">

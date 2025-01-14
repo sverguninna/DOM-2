@@ -1,29 +1,28 @@
 import { renderList } from "./render.js"
 import { getDateNow, getSafeHtmlString, getTimeNow, clearForm } from "../helper/helpers.js"
 import { data } from "../constans/data.js"
+import { postComment } from "../APİ/Requests.js"
+
 
 const addFormButton = document.querySelector('.add-form-button')
 const inputName = document.querySelector('.add-form-name')
 const inputText = document.querySelector('.add-form-text')
 
 
-renderList()
-
 
 function pushComment() {
     console.log('add comment')
     if (inputName.value !== '' && inputText.value !=='') {
-        data.userComments.push({
-        userName: getSafeHtmlString(inputName.value),
-        userComment: (inputText.value),
+     let newComment = {
+        name: getSafeHtmlString(inputName.value),
+        text: (inputText.value),
         userNumLike: 0,
         date: getDateNow(), 
-        time: getTimeNow(),
         id: Math.random(),
         like: false,
-        })
-        renderList()
-        clearForm(inputName, inputText)
+      }
+      postComment(newComment)
+      clearForm(inputName, inputText)
     }
    return
 }
@@ -41,7 +40,7 @@ function responseСomment(e) {
     console.log(id);
     data.userComments.forEach((comment)=>{
         if (comment.id === id ) {
-           inputText.value = `Oтвет пользователю ${comment.userName}, ${comment.userComment}.` 
+           inputText.value = `Oтвет пользователю ${comment.name}, ${comment.text}.` 
         } 
     })
 }
