@@ -1,5 +1,5 @@
 import { renderList } from "./render.js"
-import { getDateNow, getSafeHtmlString, getTimeNow, clearForm } from "../helper/helpers.js"
+import { getDateNow, getSafeHtmlString, clearForm, delay } from "../helper/helpers.js"
 import { data } from "../constans/data.js"
 import { postComment } from "../APİ/Requests.js"
 
@@ -7,6 +7,7 @@ import { postComment } from "../APİ/Requests.js"
 const addFormButton = document.querySelector('.add-form-button')
 const inputName = document.querySelector('.add-form-name')
 const inputText = document.querySelector('.add-form-text')
+const form = document.querySelector('.add-form')
 
 
 
@@ -46,9 +47,10 @@ function responseСomment(e) {
 }
 
 function addLike(e) {
-    e.stopPropagation()
-    let id = Number(e.target.dataset.id)
-   console.log(id);
+   e.stopPropagation()
+   let id = +e.target.id
+
+   delay(1000).then(()=>{
     let newValue = data.userComments.map((comment)=>{
         if (comment.id === id && !comment.like) {
             return {...comment, like: !comment.like, userNumLike: comment.userNumLike + 1}
@@ -59,8 +61,10 @@ function addLike(e) {
         }
     })
     data.setUserComments(newValue)
-    
+
+
     renderList()
+   })
 }
 
 
@@ -69,7 +73,7 @@ function addLike(e) {
 addFormButton.addEventListener('click', pushComment)
 
 
-export {updateEvent}
+export {updateEvent, form}
 
 // Операторы легко отличить. Когда синтаксис ... используется для «распаковки» элементов массива 
 // или объекта в отдельные аргументы — это spread. 

@@ -1,3 +1,6 @@
+import { commentsList } from "../JS/render.js"
+import { form } from "../JS/comments.js"
+
 function getSafeHtmlString(comment) {
     return comment.replaceAll('<','&lt').replaceAll('>','&gt')
 }
@@ -18,4 +21,30 @@ function getTimeNow(){
     return`${date.getHours()}:${date.getMinutes()}`
 }
 
-export {getSafeHtmlString, clearForm, getDateNow, getTimeNow}
+
+function showNotShowLoader (flag, text) {
+    if (flag) {
+        commentsList.innerHTML = `<li>${text}</li>`
+    } else{
+        commentsList.innerHTML = text
+    }
+}
+
+function showNotShowForm (flag) {
+    if (flag) {
+        form.style.display = 'block'
+    } else{
+        form.style.display = 'none'
+    }
+}
+
+function delay(interval = 300) {
+    return new Promise((resolve) => {
+       setTimeout(() => {
+       resolve();
+       }, interval);
+    });
+ }
+ 
+
+export {getSafeHtmlString, clearForm, getDateNow, getTimeNow, showNotShowLoader, showNotShowForm, delay}

@@ -1,13 +1,13 @@
 import { updateEvent } from "./comments.js"
 import { data } from "../constans/data.js"
 import { getCommentsList } from "../APİ/Requests.js" 
+const commentsList = document.querySelector('.comments')
+
+
 
 getCommentsList()
 
 
-
-
-const commentsList = document.querySelector('.comments')
 
 function renderList() {
     commentsList.innerHTML = ''
@@ -33,4 +33,4 @@ function renderList() {
   updateEvent()
 }
 
-export {renderList}
+export {renderList, commentsList}
