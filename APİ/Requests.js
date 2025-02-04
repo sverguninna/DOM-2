@@ -1,6 +1,7 @@
 import { data } from "../constans/data.js";
 import { renderList } from "../JS/render.js";
-import { showNotShowLoader, showNotShowForm } from "../helper/helpers.js";
+import { showNotShowLoader, showNotShowForm, formatData} from "../helper/helpers.js";
+
 
 const host = 'https://wedev-api.sky.pro/api/v1/inna-svergun/comments'
 
@@ -21,16 +22,16 @@ async function getCommentsList(firstLoader = 1) {
     const objComment = await respons.json()
 
     let apiData = objComment.comments.map((comment) => {
+  
         return {
              name: comment.author.name,
              text: comment.text,
-             userNumLike: comment.likes ,
-             date: comment.date, 
+             userNumLike: comment.likes,
+             date: formatData(comment.date),
              id: comment.id,
-             like: comment.isliked,
+             like: comment.isLiked,
         }
     })
-
     data.setUserComments(apiData)
     renderList()
     
@@ -42,7 +43,6 @@ async function getCommentsList(firstLoader = 1) {
 
 async function postComment(newComment) {
    showNotShowForm(false)
-   showNotShowLoader(true, 'Комментарий добавляется...')
    try {
 
     let respons = await fetch(host, {

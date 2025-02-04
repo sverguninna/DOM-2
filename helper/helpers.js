@@ -1,5 +1,5 @@
 import { commentsList } from "../JS/render.js"
-import { form } from "../JS/comments.js"
+import { form, formLoader } from "../JS/comments.js"
 
 function getSafeHtmlString(comment) {
     return comment.replaceAll('<','&lt').replaceAll('>','&gt')
@@ -21,6 +21,15 @@ function getTimeNow(){
     return`${date.getHours()}:${date.getMinutes()}`
 }
 
+function formatData (data){
+    return new Date(data).toLocaleString('ru-RU', {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    })
+}
 
 function showNotShowLoader (flag, text) {
     if (flag) {
@@ -33,8 +42,10 @@ function showNotShowLoader (flag, text) {
 function showNotShowForm (flag) {
     if (flag) {
         form.style.display = 'block'
-    } else{
+        formLoader.style.display = 'none'
+    } else {
         form.style.display = 'none'
+        formLoader.style.display = 'block'
     }
 }
 
@@ -47,4 +58,4 @@ function delay(interval = 300) {
  }
  
 
-export {getSafeHtmlString, clearForm, getDateNow, getTimeNow, showNotShowLoader, showNotShowForm, delay}
+export {getSafeHtmlString, clearForm, getDateNow, getTimeNow, showNotShowLoader, showNotShowForm, delay, formatData}

@@ -5,7 +5,7 @@
     }
  };
 
-export {data}
+export { data }
 
 // {
 //     userName: 'Глеб Фокин',
