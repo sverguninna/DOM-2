@@ -11,7 +11,7 @@ const form = document.querySelector('.add-form')
 const formLoader = document.querySelector('.form-loader')
 
 function pushComment() {
-   
+
     if (inputName.value !== '' && inputText.value !== '') {
         let newComment = {
             name: getSafeHtmlString(inputName.value),
@@ -22,7 +22,7 @@ function pushComment() {
             like: false,
         }
         postComment(newComment)
-        clearForm(inputName, inputText)
+       /*  */
     }
     return
 }
@@ -74,7 +74,7 @@ function addLike(e) {
 addFormButton.addEventListener('click', pushComment)
 
 
-export { updateEvent, form, formLoader}
+export { updateEvent, form, formLoader, inputName, inputText}
 
 // Операторы легко отличить. Когда синтаксис ... используется для «распаковки» элементов массива
 // или объекта в отдельные аргументы — это spread.
