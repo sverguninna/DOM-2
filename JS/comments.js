@@ -1,7 +1,9 @@
-import { renderList } from "./render.js"
-import { getDateNow, getSafeHtmlString, clearForm, delay,  } from "../helper/helpers.js"
+import { renderList , } from "./render.js"
+import { getDateNow, getSafeHtmlString, clearForm, delay } from "../helper/helpers.js"
 import { data } from "../constans/data.js"
 import { postComment } from "../APİ/Requests.js"
+import { renderLogin, renderRegistration } from "./authorization.js"
+
 
 
 const addFormButton = document.querySelector('.add-form-button')
@@ -9,6 +11,7 @@ const inputName = document.querySelector('.add-form-name')
 const inputText = document.querySelector('.add-form-text')
 const form = document.querySelector('.add-form')
 const formLoader = document.querySelector('.form-loader')
+
 
 function pushComment() {
 
@@ -22,7 +25,6 @@ function pushComment() {
             like: false,
         }
         postComment(newComment)
-       /*  */
     }
     return
 }
@@ -69,12 +71,13 @@ function addLike(e) {
 }
 
 
+  addFormButton.addEventListener('click', pushComment)  
 
 
-addFormButton.addEventListener('click', pushComment)
 
 
-export { updateEvent, form, formLoader, inputName, inputText}
+
+export { updateEvent, form, formLoader, inputName, inputText, }
 
 // Операторы легко отличить. Когда синтаксис ... используется для «распаковки» элементов массива
 // или объекта в отдельные аргументы — это spread.
