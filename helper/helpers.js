@@ -1,5 +1,5 @@
-import { commentsList } from "../JS/render.js"
-import { form, formLoader } from "../JS/comments.js"
+import { commentsList,} from "../JS/render.js"
+import {  formLoader, form,  } from "../JS/comments.js"
 
 function getSafeHtmlString(comment) {
     return comment.replaceAll('<','&lt').replaceAll('>','&gt')
